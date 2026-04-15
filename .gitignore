@@ -5,7 +5,10 @@ target/
 CLAUDE.md
 REPASO_ENTREVISTA.md
 REPASO_ENTREVISTA_RESPUESTAS.md
+REPASO_CONCEPTOS.md
+.env
 src/skills/
+.claude/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

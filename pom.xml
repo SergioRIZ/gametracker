@@ -28,6 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<!-- Forzado por CVE-2026-34483. Revisar al subir Spring Boot. -->
+		<tomcat.version>10.1.54</tomcat.version>
 	</properties>
 	<dependencies>
 		<dependency>

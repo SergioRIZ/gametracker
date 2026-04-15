@@ -45,7 +45,7 @@ Separación clara de responsabilidades: el controlador no conoce la base de dato
 | `platform`    | `String`     | Obligatorio                                |
 | `genre`       | `String`     | Opcional                                   |
 | `releaseYear` | `Integer`    | Mínimo 1958                                |
-| `status`      | `GameStatus` | Enum: `PENDING`, `PLAYING`, `FINISHED`, `DROPPED` |
+| `status`      | `GameStatus` | Enum: `PENDING`, `PLAYING`, `COMPLETED`, `ON_HOLD`, `ABANDONED` |
 
 ---
 
@@ -65,7 +65,7 @@ Base URL: `http://localhost:8080/games`
 
 - `?status=PLAYING` — filtra por estado
 - `?platform=PS5` — filtra por plataforma
-- `?status=FINISHED&platform=Switch` — combina ambos
+- `?status=COMPLETED&platform=Switch` — combina ambos
 
 ### Ejemplo de cuerpo JSON
 
@@ -75,7 +75,7 @@ Base URL: `http://localhost:8080/games`
   "platform": "PC",
   "genre": "Metroidvania",
   "releaseYear": 2017,
-  "status": "FINISHED"
+  "status": "COMPLETED"
 }
 ```
 
@@ -199,7 +199,7 @@ Actualizar un juego:
 ```bash
 curl -X PUT http://localhost:8080/games/1 \
   -H "Content-Type: application/json" \
-  -d '{"title":"Elden Ring","platform":"PS5","genre":"Souls","releaseYear":2022,"status":"FINISHED"}'
+  -d '{"title":"Elden Ring","platform":"PS5","genre":"Souls","releaseYear":2022,"status":"COMPLETED"}'
 ```
 
 Eliminar un juego:

@@ -2,6 +2,7 @@ package com.sergioroldan.gametracker.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -61,6 +62,17 @@ public class GlobalExceptionHandler {
         response.put("messages", fieldErrors);
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    // Maneja JSON mal formado o valores que no pueden deserializarse (ej. enum invalido)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, Object>> handleUnreadableJson(HttpMessageNotReadableException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("timestamp", LocalDateTime.now());
+        error.put("status", HttpStatus.BAD_REQUEST.value());
+        error.put("error", "Bad Request");
+        error.put("message", "El cuerpo de la peticion no se puede leer o contiene valores invalidos");
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     // Maneja cualquier otra excepción no controlada
